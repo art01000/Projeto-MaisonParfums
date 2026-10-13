@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_10_09_131749) do
+ActiveRecord::Schema[8.1].define(version: 2026_10_09_220054) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -23,23 +23,23 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_131749) do
 
   create_table "itens_carrinhos", force: :cascade do |t|
     t.bigint "carrinho_id", null: false
-    t.bigint "perfume_id", null: false
+    t.bigint "produto_id", null: false
     t.integer "quantidade"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["carrinho_id"], name: "index_itens_carrinhos_on_carrinho_id"
-    t.index ["perfume_id"], name: "index_itens_carrinhos_on_perfume_id"
+    t.index ["produto_id"], name: "index_itens_carrinhos_on_produto_id"
   end
 
   create_table "itens_pedidos", force: :cascade do |t|
     t.bigint "pedido_id", null: false
-    t.bigint "perfume_id", null: false
+    t.bigint "produto_id", null: false
     t.integer "quantidade"
     t.decimal "preco_unitario"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["pedido_id"], name: "index_itens_pedidos_on_pedido_id"
-    t.index ["perfume_id"], name: "index_itens_pedidos_on_perfume_id"
+    t.index ["produto_id"], name: "index_itens_pedidos_on_produto_id"
   end
 
   create_table "pedidos", force: :cascade do |t|
@@ -51,7 +51,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_131749) do
     t.index ["usuario_id"], name: "index_pedidos_on_usuario_id"
   end
 
-  create_table "perfumes", force: :cascade do |t|
+  create_table "produtos", force: :cascade do |t|
     t.string "nome"
     t.string "marca"
     t.string "descricao"
@@ -83,8 +83,8 @@ ActiveRecord::Schema[8.1].define(version: 2026_10_09_131749) do
 
   add_foreign_key "carrinhos", "usuarios"
   add_foreign_key "itens_carrinhos", "carrinhos"
-  add_foreign_key "itens_carrinhos", "perfumes"
+  add_foreign_key "itens_carrinhos", "produtos"
   add_foreign_key "itens_pedidos", "pedidos"
-  add_foreign_key "itens_pedidos", "perfumes"
+  add_foreign_key "itens_pedidos", "produtos"
   add_foreign_key "pedidos", "usuarios"
 end
