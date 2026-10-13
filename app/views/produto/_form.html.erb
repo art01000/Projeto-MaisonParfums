@@ -1,0 +1,81 @@
+<%= form_with model: produto, url: (produto.new_record? ? produtos_path : produto_path(produto)) do |form| %>
+  <% if produto.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <h2><%= pluralize(produto.errors.count, "erro") %>:</h2>
+      <ul>
+        <% produto.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, "Nome" %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :marca, "Marca" %>
+    <%= form.text_field :marca %>
+  </div>
+
+  <div>
+    <%= form.label :descricao, "Descrição" %>
+    <%= form.text_area :descricao %>
+  </div>
+
+  <div>
+    <%= form.label :categoria, "Categoria" %>
+    <%= form.select :categoria, ["feminino", "masculino", "unissex"], include_blank: "Selecione" %>
+  </div>
+
+  <div>
+    <%= form.label :tamanho, "Tamanho" %>
+    <%= form.text_field :tamanho, list: "tamanhos-sugeridos", placeholder: "Ex: 2ml, 5ml, 10ml, Lacrado" %>
+    <datalist id="tamanhos-sugeridos">
+      <option value="2ml">
+      <option value="5ml">
+      <option value="10ml">
+      <option value="Lacrado">
+    </datalist>
+  </div>
+
+  <div>
+    <%= form.label :fragancia, "Fragrância" %>
+    <%= form.text_field :fragancia, list: "fragrancias-sugeridas", placeholder: "Ex: Floral, Amadeirada" %>
+    <datalist id="fragrancias-sugeridas">
+      <option value="Floral">
+      <option value="Cítrica">
+      <option value="Amadeirada">
+      <option value="Oriental">
+      <option value="Fougère">
+      <option value="Chipre">
+      <option value="Gourmand">
+      <option value="Aromática">
+      <option value="Aquática">
+    </datalist>
+  </div>
+
+  <div>
+    <%= form.label :intensidade, "Intensidade" %>
+    <%= form.select :intensidade, ["baixa", "média", "alta"], include_blank: "Selecione" %>
+  </div>
+
+  <div>
+    <%= form.label :momento, "Momento" %>
+    <%= form.select :momento, ["dia", "noite", "ambos"], include_blank: "Selecione" %>
+  </div>
+
+  <div>
+    <%= form.label :preco, "Preço" %>
+    <%= form.number_field :preco, step: 0.01 %>
+  </div>
+
+  <div>
+    <%= form.label :estoque, "Estoque" %>
+    <%= form.number_field :estoque %>
+  </div>
+
+  <%= form.submit "Salvar" %>
+<% end %>
