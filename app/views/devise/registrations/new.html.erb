@@ -20,20 +20,8 @@
 
         <% label_classes = "block text-sm font-medium text-gray-700 mb-1.5 sm:mb-2" %>
 
-        <!-- Exibição de erros -->
-        <% if resource.errors.any? %>
-          <div class="mb-5 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-700">
-            <p class="font-semibold mb-1">
-              Não foi possível criar sua conta:
-            </p>
-
-            <ul class="list-disc pl-5 space-y-1">
-              <% resource.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-              <% end %>
-            </ul>
-          </div>
-        <% end %>
+        <!-- Erros de validação do Devise -->
+        <%= render "devise/shared/error_messages", resource: resource %>
 
         <!-- Nome completo -->
         <div class="mb-4 sm:mb-5">
@@ -62,7 +50,7 @@
 
           <%= f.email_field :email,
               autocomplete: "email",
-              placeholder: "ex: seuemail@gmail.com",
+              placeholder: "Digite seu e-mail",
               class: field_classes %>
         </div>
 
@@ -82,7 +70,7 @@
               class: field_classes %>
         </div>
 
-        <!-- Confirmação de senha -->
+        <!-- Confirmação da senha -->
         <div class="mb-5 sm:mb-6">
           <%= f.label :password_confirmation, "Confirmar senha", class: label_classes %>
 
@@ -103,11 +91,7 @@
       <!-- Separador -->
       <div class="flex items-center gap-2 sm:gap-3 my-6 sm:my-7">
         <div class="h-px bg-gray-200 flex-1"></div>
-
-        <span class="text-xs text-gray-400 uppercase tracking-wide">
-          ou
-        </span>
-
+        <span class="text-xs text-gray-400 uppercase tracking-wide">ou</span>
         <div class="h-px bg-gray-200 flex-1"></div>
       </div>
 
@@ -120,15 +104,11 @@
 
     <!-- Link para login -->
     <div class="bg-white border border-gray-200 rounded-xl mt-4 sm:mt-5 py-4 sm:py-5 px-3 sm:px-4 text-center text-xs sm:text-sm shadow-sm">
-
-      <span class="text-gray-600">
-        Já tem uma conta?
-      </span>
+      <span class="text-gray-600">Já tem uma conta?</span>
 
       <%= link_to "Entrar",
           new_session_path(resource_name),
           class: "font-semibold text-gray-900 hover:text-gray-500 transition duration-200" %>
-
     </div>
 
   </div>
