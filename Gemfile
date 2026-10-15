@@ -82,4 +82,3 @@ gem "tailwindcss-rails", "~> 4.6"
 gem "devise", "~> 5.0"
 
 gem "devise-argon2", "~> 2.0"
-
