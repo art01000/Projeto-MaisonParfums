@@ -9,6 +9,16 @@ class ApplicationController < ActionController::Base
 
   protected
 
+  # Atalhos para não quebrar views/controllers que ainda usam esses nomes
+  def logado?
+    usuario_signed_in?
+  end
+
+  def usuario_logado
+    current_usuario
+  end
+  helper_method :logado?, :usuario_logado
+
   def exigir_admin
     authenticate_usuario!
     redirect_to root_path, alert: "Acesso negado" unless current_usuario.admin?
@@ -16,6 +26,10 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(usuario)
     stored_location_for(usuario) || (usuario.admin? ? admin_path : perfil_path)
+  end
+
+  def after_sign_out_path_for(_resource_or_scope)
+    new_usuario_session_path
   end
 
   def configure_permitted_parameters
