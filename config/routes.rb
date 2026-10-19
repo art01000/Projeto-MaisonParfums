@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
   get "perfil", to: "usuario#show"
   get "admin", to: "admin#index"
+  get "decants/masculinos", to: "produto#decants_masculinos", as: :decants_masculinos
+  get "decants/femininos",  to: "produto#decants_femininos",  as: :decants_femininos
 
-  resources :produtos, controller: "produto", only: [:index, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+  resources :produtos, controller: "produto", only: [:index, :show, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
 end
