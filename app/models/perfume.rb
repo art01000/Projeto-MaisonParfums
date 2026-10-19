@@ -18,6 +18,7 @@ class Perfume < ApplicationRecord
     aromatica: "aromatica",
     aquatica: "aquatica"
   }
+
   enum :categoria, {
     feminino: "feminino",
     masculino: "masculino",
@@ -42,4 +43,19 @@ class Perfume < ApplicationRecord
     media: "media",
     alta: "alta"
   }
+
+  enum :piramide_olfativa, {
+    saida: "saida",
+    coracao: "coracao",
+    base: "base"
+  }
+
+  enum :concentracao {
+    parfum: "parfum",
+    EDP: "EDP",
+    EDT: "EDT",
+    EDC: "EDC",
+    splash: "splash"
+  }
+
 end
