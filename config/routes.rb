@@ -14,7 +14,8 @@ Rails.application.routes.draw do
   root "home#index"
 
   get "home", to: "home#index"
-
   get "perfil", to: "usuario#show"
   get "admin", to: "admin#index"
+
+  resources :produtos, controller: "produto", only: [:index, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
 end

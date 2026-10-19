@@ -1,8 +1,7 @@
 class UsuarioController < ApplicationController
   before_action :authenticate_usuario!, only: [:show] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
   def show
-    @usuario = usuario_logado
-    redirect_to login_path unless @usuario
+    @usuario = current_usuario
   end
 
 

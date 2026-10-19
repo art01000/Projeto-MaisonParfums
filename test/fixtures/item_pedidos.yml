@@ -2,12 +2,12 @@
 
 one:
   pedido: one
-  perfume: one
+  produto: one
   quantidade: 1
   preco_unitario: 9.99
 
 two:
   pedido: two
-  perfume: two
+  produto: two
   quantidade: 1
   preco_unitario: 9.99
