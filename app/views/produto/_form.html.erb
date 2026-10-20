@@ -42,6 +42,11 @@
   </div>
 
   <div>
+    <%= form.label :frasco_mae_id, "Frasco Mãe (de onde sai o líquido)" %>
+    <%= form.collection_select :frasco_mae_id, FrascoMae.order(:nome), :id, :nome, include_blank: "Nenhum (produto lacrado)" %>
+  </div>
+
+  <div>
     <%= form.label :fragancia, "Fragrância" %>
     <%= form.text_field :fragancia, list: "fragrancias-sugeridas", placeholder: "Ex: Floral, Amadeirada" %>
     <datalist id="fragrancias-sugeridas">
@@ -73,7 +78,7 @@
   </div>
 
   <div>
-    <%= form.label :estoque, "Estoque" %>
+    <%= form.label :estoque, "Estoque (só para produto lacrado)" %>
     <%= form.number_field :estoque %>
   </div>
 
