@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   get "decants/femininos",  to: "produto#decants_femininos",  as: :decants_femininos
 
   resources :produtos, controller: "produto", only: [:index, :show, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+  resources :frasco_maes, controller: "frasco_mae", except: [:show] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
 end
