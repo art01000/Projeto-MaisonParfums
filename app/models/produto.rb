@@ -43,8 +43,8 @@ class Produto < ApplicationRecord
   }
 
   enum :piramide_olfativa, {
-    saida: "saida",
-    coracao: "coracao",
+    saida: "saída",
+    coracao: "coração",
     base: "base"
   }
 

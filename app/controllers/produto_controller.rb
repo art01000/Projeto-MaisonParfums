@@ -5,6 +5,7 @@ class ProdutoController < ApplicationController
 
   def index
   end
+  
   def new
     @produto = Produto.new
   end
@@ -38,6 +39,6 @@ class ProdutoController < ApplicationController
   private
 
   def produto_params
-    params.require(:produto).permit(:nome, :marca, :descricao, :categoria, :tamanho, :fragancia, :intensidade, :momento, :preco, :estoque,)#imagem
+    params.require(:produto).permit(:nome, :marca, :descricao, :categoria, :tamanho, :fragancia, :intensidade, :momento, :piramide_olfativa, :concentracao, :preco, :estoque,)#imagem
   end
 end

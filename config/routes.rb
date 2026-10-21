@@ -18,4 +18,21 @@ Rails.application.routes.draw do
   get "admin", to: "admin#index"
 
   resources :produtos, controller: "produto", only: [:index, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+
+  Rails.application.routes.draw do
+    devise_for :usuarios
+    
+    namespace :admin do
+      root to: 'dashboard#index'
+    end
+
+    root 'produtos#index'
+
+    namespace :admin do
+      root to: 'dashboard#index'
+      resources :pedidos, only: [:index]
+    end
+
+    root 'produtos#index'
+  end
 end

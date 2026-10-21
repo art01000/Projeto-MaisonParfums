@@ -68,8 +68,19 @@
   </div>
 
   <div>
+    <%= form.label :piramide_olfativa, "Pirâmide olfativa"%>
+    <%= form.select :piramide_olfativa, ["saída", "coração", "base"], include_blank: "Selecione" %>
+  </div>
+
+  <div>
+    <%= form.label :concentracao, "Concentração"%>
+    <%= form.select :concentracao, ["parfum", "EDP", "EDT", "EDC", "splash"], include_blank: "Selecione" %>
+  </div>
+
+  <div>
     <%= form.label :preco, "Preço" %>
     <%= form.number_field :preco, step: 0.01 %>
+    <p>Preço: <%= formatar_preco(produto.preco) %></p>
   </div>
 
   <div>
