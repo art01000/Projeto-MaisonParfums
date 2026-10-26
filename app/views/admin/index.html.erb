@@ -1,3 +1,16 @@
+<header>
+  <nav>
+    <ul>
+      <li><%= link_to "Início", root_path %></li>
+      <% if usuario_signed_in? %>
+        <li><%= button_to "Sair", destroy_usuario_session_path, method: :delete %></li>
+      <% end %>
+      <li><%= link_to "Cadastrar Produtos", new_produto_path %></li>
+    </ul>
+  </nav>
+</header>
+<main class="container">
+  <h1>Bem-vindo ao Painel Administrativo</h1>
 <aside class="sidebar-container">
   <div class="topo">
     <div class="logo">
