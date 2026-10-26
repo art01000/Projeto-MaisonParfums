@@ -35,4 +35,20 @@ Rails.application.routes.draw do
 
     root 'produtos#index'
   end
+<<<<<<< Updated upstream
+=======
+
+  root 'produtos#index'
+
+  namespace :admin do
+    root to: 'dashboard#index'
+    resources :pedidos, only: [:index]
+  end
+
+  root 'produtos#index'
+  resources :frasco_maes, controller: "frasco_mae", except: [:show] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+>>>>>>> Stashed changes
 end
