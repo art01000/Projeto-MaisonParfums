@@ -3,5 +3,6 @@
 <main>
     <h1>Olá, <%= @usuario.nome %></h1>
     <p><%= @usuario.email %></p>
+    <%= link_to 'inicio', root_path %>
     <%= button_to "Sair", destroy_usuario_session_path, method: :delete %>
 </main>

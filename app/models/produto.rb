@@ -1,18 +1,23 @@
 class Produto < ApplicationRecord
   has_many :itens_carrinho, dependent: :destroy
   has_many :carrinhos, through: :itens_carrinho
-  has_many :itens_pedidos, dependent: :destroy
+  has_many :itens_pedidos, class_name: "ItemPedido", dependent: :destroy
   has_many :pedidos, through: :itens_pedidos
-  #has_one_attached :imagem
+  belongs_to :frasco_mae, optional: true
+  # has_one_attached :imagem
 
   validates :nome, presence: true
   validates :preco, presence: true, numericality: { greater_than: 0 }
 
+<<<<<<< HEAD
   =======
+=======
+>>>>>>> upstream/main
   after_create_commit do
     broadcast_prepend_to "produtos_#{categoria}", target: "produtos", partial: "produto/produto", locals: { produto: self }
   end
 
+<<<<<<< HEAD
   enum :fragancia, {
     floral: "floral",
     amadeirada: "amadeirada",
@@ -25,25 +30,46 @@ class Produto < ApplicationRecord
     aquatica: "aquatica"
   }
 
+=======
+>>>>>>> upstream/main
   enum :categoria, {
-    feminino: "feminino",
-    masculino: "masculino",
-    unissex: "unissex"
+    feminino: "Feminino",
+    masculino: "Masculino",
+    unissex: "Unissex"
   }
 
+  enum :tamanho, {
+    tamanho_2ml: "2ml",
+    tamanho_5ml: "5ml",
+    tamanho_10ml: "10ml",
+    lacrado: "Lacrado"
+  }
+
+  enum :fragancia, {
+    floral: "Floral",
+    cítrica: "Cítrica",
+    amadeirada: "Amadeirada",
+    oriental: "Oriental",
+    fougère: "Fougère",
+    chipre: "Chipre",
+    gourmand: "Gourmand",
+    aromática: "Aromática",
+    aquática: "Aquática"
+  }
 
   enum :momento, {
-    dia: "dia",
-    noite: "noite",
-    ambos: "ambos"
+    dia: "Dia",
+    noite: "Noite",
+    ambos: "Ambos"
   }
 
   enum :intensidade, {
-    baixa: "baixa",
-    media: "média",
-    alta: "alta"
+    baixa: "Baixa",
+    media: "Média",
+    alta: "Alta"
   }
 
+<<<<<<< HEAD
   enum :piramide_olfativa, {
     saida: "saida",
     coracao: "coracao",
@@ -58,6 +84,8 @@ class Produto < ApplicationRecord
     splash: "splash"
   }
 
+=======
+>>>>>>> upstream/main
   # "tamanho_5ml" -> "5ml" -> 5 | "Lacrado" -> nil
   def volume_ml
     v = self.class.tamanhos[tamanho].to_i
@@ -92,7 +120,11 @@ class Produto < ApplicationRecord
       end
     end
   end
+<<<<<<< HEAD
 end
 >>>>>>> main
 
 end
+=======
+end
+>>>>>>> upstream/main

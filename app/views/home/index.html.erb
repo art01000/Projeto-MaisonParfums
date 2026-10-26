@@ -1,3 +1,211 @@
-<div class="flex gap-4">
-    <%= link_to "Login", usuario_session_path, class: "text-blue-500 px-4 py-2 rounded" %>
-</div>
+<header class="bg-[#E5E6E7] border-b border-[#D0D3D6] shrink-0 sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between gap-6">
+    <%= link_to root_path, class: "font-serif text-2xl tracking-wide text-[#485057]" do %>
+      Maison Parfum
+    <% end %>
+
+    <form action="#" class="hidden md:flex flex-1 max-w-md">
+      <input type="search" placeholder="Buscar perfumes..." class="w-full border border-[#C9CDD1] rounded-l px-4 py-2 text-sm focus:outline-none focus:border-[#748A9C]">
+      <button type="submit" class="bg-[#B8BDC3] text-[#343A40] px-4 rounded-r cursor-pointer hover:bg-[#A7ADB4]">
+        <span class="material-symbols-outlined">search</span>
+      </button>
+    </form>
+
+    <div class="flex items-center gap-4 text-sm text-[#485057]">
+      <% if usuario_signed_in? %>
+        <%= link_to usuario_session_path, aria: { label: "Login" }, title: "Login", class: "flex items-center hover:text-[#748A9C]" do %>
+          <span class="material-symbols-outlined">person</span>
+        <% end %>
+
+        <%= button_to destroy_usuario_session_path, method: :delete, aria: { label: "Sair" }, title: "Sair", class: "flex items-center hover:text-[#748A9C] cursor-pointer" do %>
+          <span class="material-symbols-outlined">logout</span>
+        <% end %>
+      <% else %>
+        <%= link_to new_usuario_session_path, aria: { label: "Entrar" }, title: "Entrar", class: "flex items-center hover:text-[#748A9C]" do %>
+          <span class="material-symbols-outlined">person</span>
+        <% end %>
+      <% end %>
+
+      <%= link_to "#", aria: { label: "Carrinho" }, title: "Carrinho", class: "flex items-center hover:text-[#748A9C]" do %>
+        <span class="material-symbols-outlined">shopping_bag</span>
+      <% end %>
+    </div>
+  </div>
+
+  <nav class="hidden md:block border-t border-[#D9DADD]">
+    <ul class="max-w-7xl mx-auto px-4 flex justify-center items-center gap-8 text-sm font-medium text-[#485057]">
+      <li class="py-3"><%= link_to "Início", root_path, class: "hover:text-[#748A9C]" %></li>
+
+      <% { "Decants Masculinos" => %w[Árabes Chanel Dior Versace],
+           "Decants Femininos"  => %w[Árabes Chanel Dior Lancôme],
+           "Decants Nicho"      => %w[Creed Xerjoff Nishane Mancera] }.each do |titulo, marcas| %>
+        <li class="relative group py-3">
+          <a href="#" class="hover:text-[#748A9C]"><%= titulo %></a>
+          <ul class="invisible opacity-0 translate-y-2 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-500 ease-out absolute left 0 top-full pt-2 bg-white/95 backdrop-blur-md border border-[#D9DADD]/70 shadow-[0_px_30px_rgba(72,80,87,0.18)] rounded-lg min-w-44 z-20">
+            <% marcas.each do |marca| %>
+              <li><a href="#" class="block px-4 py-2 text-[#485057] hover:bg-[#F0F1F2]"><%= marca %></a></li>
+            <% end %>
+          </ul>
+        </li>
+      <% end %>
+
+      <li class="py-3"><a href="#destaques" class="hover:text-[#748A9C]">Destaques</a></li>
+      <li class="py-3"><a href="#descubra" class="hover:text-[#748A9C]">Descubra seu Perfume</a></li>
+      <li class="py-3"><a href="#contato" class="hover:text-[#748A9C]">Contato</a></li>
+      <li class="py-3"><a href="#" class="hover:text-[#748A9C]">Grupo VIP de Ofertas (WhatsApp)</a></li>
+    </ul>
+  </nav>
+
+  <details class="md:hidden border-t border-[#D9DADD]">
+    <summary class="px-4 py-3 text-sm font-medium text-[#485057] cursor-pointer">Menu</summary>
+    <ul class="px-4 pb-3 flex flex-col gap-2 text-sm text-[#485057]">
+      <li><%= link_to "Início", root_path %></li>
+      <li><a href="#">Decants Masculinos</a></li>
+      <li><a href="#">Decants Femininos</a></li>
+      <li><a href="#">Decants Nicho</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </details>
+</header>
+
+<main class="bg-[#F7F7F5]">
+  <section id="secao-carrossel" class="relative w-full" data-controller="carousel" data-carousel-interval-value="5000">
+    <div class="relative h-64 md:h-96 overflow-hidden">
+
+       <div data-carousel-target="slide" class="absolute inset-0 transition-opacity duration-700 opacity-100">
+        <%= image_tag "slide-mais-vendidos.jpeg", alt: "mais vendidos", class: "absolute inset-0  w-full h-full object-cover" %>
+        <div class="absolute inset-0 bg-linear-to-r from-[#17232E]/90 via-[#17232E]/50 to-transparent"></div>
+        <div class="relative z-10 h-full max-w-7xl mx-auto px-6 md:16px flex flex-col justify-center items-start text-white">
+          <h2 class="font-serif text-5xl md:text-6xl leading-tight">Destaques</h2>
+          <p>Os mais vendidos por categoria</p>
+        </div>
+      </div>
+
+      <div data-carousel-target="slide" class="absolute inset-0 transition-opacity duration-700 opacity-100">
+        <%= image_tag "slide-frete.jpeg", alt: "frete", class: "absolute inset-0  w-full h-full object-cover" %>
+        <div class="absolute inset-0 bg-linear-to-r from-[#17232E]/90 via-[#17232E]/50 to-transparent"></div>
+        <div class="relative z-10 h-full max-w-7xl mx-auto px-6 md:16px flex flex-col justify-center items-start text-white">
+          <h2 class="font-serif text-5xl md:text-6xl leading-tight">Frete</h2>
+          <p>Para todo o Brasil</p>
+        </div>
+      </div>
+
+      <div data-carousel-target="slide" class="absolute inset-0 transition-opacity duration-700 opacity-100">
+        <%= image_tag "slide-quiz.jpeg", alt: "quiz", class: "absolute inset-0  w-full h-full object-cover" %>
+        <div class="absolute inset-0 bg-linear-to-r from-[#17232E]/90 via-[#17232E]/50 to-transparent"></div>
+        <div class="relative z-10 h-full max-w-7xl mx-auto px-6 md:16px flex flex-col justify-center items-start text-white">
+          <h2 class="font-serif text-5xl md:text-6xl leading-tight">Quiz Gratuito</h2>
+          <p>Descubra o seu perfume ideal</p>
+        </div>
+      </div>
+
+      <button type="button" data-action="carousel#previous" aria-label="Anterior" class="absolute left-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-start bg-black/5 backdrop-blur-sm text-white rounded-full cursor-pointer hover:bg-black/50 transition-colors">
+        <span class="material-symbols-outlined leading-none text-[12px]">chevron_left</span>
+      </button>
+
+      <button type="button" data-action="carousel#previous" aria-label="Próximo" class="absolute right-5 top-1/2 -translate-y-1/2 z-20 w-10 h-10 flex items-center justify-end bg-black/5 backdrop-blur-sm text-white rounded-full cursor-pointer hover:bg-black/50 transition-colors">
+        <span class="material-symbols-outlined leading-none text-[12px]">chevron_right</span>
+      </button>
+
+      <div class="absolute bottom-3 left-0 right-0 flex justify-center gap-2">
+        <% 3.times do |i| %>
+          <button type="button" data-carousel-target="dot" data-action="carousel#goTo" data-carousel-index-param="<%= i %>" aria-label="Slide <%= i + 1 %>" class="w-3 h-3 rounded-full cursor-pointer <%= i.zero? ? 'bg-white' : 'bg-white/50' %>"></button>
+        <% end %>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#F0F1F2] border-30 border-[#F0F1F2]">
+    <div class="max-w-7xl mx-auto px-4 py-4 grid grid-cols-2 md:grid-cols-4 gap-4 text-sm">
+      <% [["local_shipping", "Frete grátis", "Em compras acima de R$ 250"],
+        ["credit_card", "Parcele sem juros", "Em até 3x em todo o site"],
+        ["pix", "3% off no Pix", "Desconto na finalização"],
+        ["lock", "Site seguro", "Seus dados protegidos"]].each do |icone, titulo, texto| %>
+        <div class="flex items-center gap-3">
+          <span class="material-symbols-outlined text-[#748A9C]"><%= icone %></span>
+          <div>
+            <p class="font-semibold text-[#485057]"><%= titulo %></p>
+            <p class="text-xs text-[#737980]"><%= texto %></p>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </section>
+
+  <section id="video" class="bg-[#748A9C] px-8 py-12">
+    <div class="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 items-center gap-10">
+      <div class="flex justify-center md:justify-start">
+        <%= video_tag "video_parfum.mp4", autoplay: true, muted: true, loop: true, playsinline: true, controls: true, preload: "metadata", class: "w-full max-w-xs rounded-xl shadow-lg" %>
+      </div>
+
+      <div class="text-white text-center md:text-left">
+        <p class="text-xs uppercase tracking-widest text-[#D9DDE0] mb-2">Maison Parfum</p>
+        <h2 class="font-serif text-3xl mb-4">Uma experiência em cada fragrância</h2>
+        <p class="text-[#E5E6E7] mb-6">Conheça nossa seleção de decants e encontre o perfume que combina com você.</p>
+        <%= link_to "Ver coleção", "#secao-decants", class: "inline-block bg-[#B8BDC3] text-[#343A40] font-semibold px-6 py-3 rounded hover:bg-[#D9DDE0]" %>
+      </div>
+    </div>
+  </section>
+
+  <section id="secao-decants" class="bg-[#F7F7F5] px-4 sm:px-6 lg:px-8 py-8 md:py-10">
+    <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+
+      <%# Decants masculinos %>
+      <%= link_to decants_masculinos_path,
+          class: "group relative isolate block h-64 sm:h-72 lg:h-64 xl:h-72 overflow-hidden rounded-xl bg-[#26323D] shadow-sm hover:shadow-xl transition-all duration-500" do %>
+
+        <%= image_tag "destaques-masculino.jpeg",
+            alt: "Coleção de decants masculinos",
+            class: "absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" %>
+
+        <div class="absolute inset-0 bg-linear-to-r from-[#17232E]/95 via-[#17232E]/65 to-transparent"></div>
+
+        <div class="absolute inset-y-0 left-0 z-10 flex flex-col justify-center items-start p-5 sm:p-7 lg:p-8 max-w-[75%]">
+          <h2 class="font-serif text-2xl sm:text-3xl text-white leading-tight mb-3">
+            Decants<br>Masculinos
+          </h2>
+
+          <p class="text-sm text-white/90 leading-relaxed max-w-xs mb-5">
+            Explore fragrâncias marcantes e encontre seu próximo perfume favorito.
+          </p>
+
+          <span class="inline-flex items-center gap-2 text-white text-sm font-medium">
+            Explorar coleção
+            <span class="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2">
+              arrow_forward
+            </span>
+          </span>
+        </div>
+      <% end %>
+
+      <%# Decants femininos %>
+      <%= link_to decants_femininos_path,
+          class: "group relative isolate block h-64 sm:h-72 lg:h-64 xl:h-72 overflow-hidden rounded-xl bg-[#A88C7D] shadow-sm hover:shadow-xl transition-all duration-500" do %>
+
+        <%= image_tag "destaque-feminino.jpeg",
+            alt: "Coleção de decants femininos",
+            class: "absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" %>
+
+        <div class="absolute inset-0 bg-linear-to-r from-[#5C4037]/90 via-[#5C4037]/55 to-transparent"></div>
+
+        <div class="absolute inset-y-0 left-0 z-10 flex flex-col justify-center items-start p-5 sm:p-7 lg:p-8 max-w-[75%]">
+          <h2 class="font-serif text-2xl sm:text-3xl text-white leading-tight mb-3">
+            Decants<br>Femininos
+          </h2>
+
+          <p class="text-sm text-white/90 leading-relaxed max-w-xs mb-5">
+            Descubra fragrâncias delicadas, sofisticadas e inesquecíveis.
+          </p>
+
+          <span class="inline-flex items-center gap-2 text-white text-sm font-medium">
+            Explorar coleção
+            <span class="material-symbols-outlined transition-transform duration-300 group-hover:translate-x-2">
+              arrow_forward
+            </span>
+          </span>
+        </div>
+      <% end %>
+
+    </div>
+  </section>
+</main>

@@ -1,0 +1,24 @@
+<%= form_with model: frasco_mae, url: (frasco_mae.new_record? ? frasco_maes_path : frasco_mae_path(frasco_mae)) do |form| %>
+  <% if frasco_mae.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative" role="alert">
+      <h2><%= pluralize(frasco_mae.errors.count, "erro") %>:</h2>
+      <ul>
+        <% frasco_mae.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :nome, "Nome do perfume" %>
+    <%= form.text_field :nome %>
+  </div>
+
+  <div>
+    <%= form.label :estoque_ml, "Estoque (ml)" %>
+    <%= form.number_field :estoque_ml, min: 0 %>
+  </div>
+
+  <%= form.submit "Salvar" %>
+<% end %>

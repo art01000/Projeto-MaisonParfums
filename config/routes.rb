@@ -16,7 +16,10 @@ Rails.application.routes.draw do
   get "home", to: "home#index"
   get "perfil", to: "usuario#show"
   get "admin", to: "admin#index"
+  get "decants/masculinos", to: "produto#decants_masculinos", as: :decants_masculinos
+  get "decants/femininos",  to: "produto#decants_femininos",  as: :decants_femininos
 
+<<<<<<< HEAD
   resources :produtos, controller: "produto", only: [:index, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
 
   devise_for :usuarios
@@ -37,4 +40,8 @@ end
   resources :produtos, controller: "produto", only: [:index, :show, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
   resources :frasco_maes, controller: "frasco_mae", except: [:show] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
 end
+=======
+  resources :produtos, controller: "produto", only: [:index, :show, :new, :create, :edit, :update, :destroy] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+  resources :frasco_maes, controller: "frasco_mae", except: [:show] # rubocop:disable Layout/SpaceInsideArrayLiteralBrackets
+>>>>>>> upstream/main
 end
